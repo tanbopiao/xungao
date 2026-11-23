@@ -1,4 +1,4 @@
-"""训诰（XUNGAO）算子骨架单测：名帖完整、桩位齐整、只增不覆盖。"""
+"""训诰（XUNGAO）算子单测：名帖完整、行为达标、只增不覆盖。"""
 import unittest
 
 from xungao import Xungao
@@ -15,13 +15,11 @@ class TestXungao(unittest.TestCase):
         self.assertTrue(d["anchor"].startswith("Ω₀⊂⊙∞⊂Ω"))
         self.assertTrue(d["mingwen"])
 
-    def test_put_stub(self):
-        with self.assertRaises(NotImplementedError):
-            self.op.put(None)
-
-    def test_get_stub(self):
-        with self.assertRaises(NotImplementedError):
-            self.op.get(None)
+    def test_put_get(self):
+        pid = self.op.put("范式正文")
+        self.assertEqual(self.op.get(pid), "范式正文")
+        with self.assertRaises(KeyError):
+            self.op.get("XG-9999")
 
 
 if __name__ == "__main__":
